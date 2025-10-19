@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Day 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            padding: 20px 15px;
+        }
+
+        /* Tablet and larger screens */
+        @media (min-width: 768px) {
+            body {
+                padding: 20px 30px;
+            }
+        }
+
+        /* Desktop screens */
+        @media (min-width: 1024px) {
+            body {
+                padding: 20px 40px;
+            }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        .screen {
+            display: none;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+            line-height: 1.2;
+            padding: 0 10px;
+        }
+
+        /* Tablet screens */
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3.5em;
+                margin-bottom: 25px;
+            }
+        }
+
+        /* Desktop screens */
+        @media (min-width: 1024px) {
+            h1 {
+                font-size: 4em;
+                margin-bottom: 30px;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .emoji {
+            font-size: 3.5em;
+            display: inline-block;
+            animation: spin 3s ease-in-out infinite;
+        }
+
+        /* Tablet screens */
+        @media (min-width: 768px) {
+            .emoji {
+                font-size: 4.5em;
+            }
+        }
+
+        /* Desktop screens */
+        @media (min-width: 1024px) {
+            .emoji {
+                font-size: 5em;
+            }
+        }
+
+        @keyframes spin {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            75% { transform: rotate(10deg) scale(1.1); }
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 2em;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Tablet screens */
+        @media (min-width: 768px) {
+            .balloon {
+                font-size: 2.5em;
+            }
+        }
+
+        /* Desktop screens */
+        @media (min-width: 1024px) {
+            .balloon {
+                font-size: 3em;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        .balloon:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .balloon:nth-child(2) { left: 80%; top: 30%; animation-delay: 1s; }
+        .balloon:nth-child(3) { left: 20%; top: 60%; animation-delay: 2s; }
+        .balloon:nth-child(4) { left: 85%; top: 70%; animation-delay: 1.5s; }
+        .balloon:nth-child(5) { left: 50%; top: 15%; animation-delay: 0.5s; }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            animation: confettiFall 3s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        button {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            font-family: 'Comic Sans MS', cursive;
+            margin-top: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        /* Tablet screens */
+        @media (min-width: 768px) {
+            button {
+                padding: 18px 45px;
+                font-size: 1.4em;
+                margin-top: 25px;
+            }
+        }
+
+        /* Desktop screens */
+        @media (min-width: 1024px) {
+            button {
+                padding: 20px 50px;
+                font-size: 1.5em;
+                margin-top: 30px;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        button:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.4);
+        }
+
+        button:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .message-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 25px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            max-width: 600px;
+            margin: 0 15px;
+        }
+
+        /* Tablet screens */
+        @media (min-width: 768px) {
+            .message-box {
+                padding: 35px 30px;
+                border-radius: 28px;
+                margin: 0 20px;
+            }
+        }
+
+        /* Desktop screens */
+        @media (min-width: 1024px) {
+            .message-box {
+                padding: 40px;
+                border-radius: 30px;
+                margin: 0 20px;
+            }
+        }
+
+        .message-box h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        /* Tablet screens */
+        @media (min-width: 768px) {
+            .message-box h2 {
+                font-size: 2.3em;
+                margin-bottom: 18px;
+            }
+        }
+
+        /* Desktop screens */
+        @media (min-width: 1024px) {
+            .message-box h2 {
+                font-size: 2.5em;
+                margin-bottom: 20px;
+            }
+        }
+
+        .heart {
+            display: inline-block;
+            color: #f5576c;
+            font-size: 1.5em;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        /* Tablet screens */
+        @media (min-width: 768px) {
+            .heart {
+                font-size: 1.8em;
+            }
+        }
+
+        /* Desktop screens */
+        @media (min-width: 1024px) {
+            .heart {
+                font-size: 2em;
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.2); }
+        }
+
+        .star {
+            position: absolute;
+            color: #ffd700;
+            font-size: 1.5em;
+            animation: twinkle 2s infinite;
+        }
+
+        /* Tablet screens */
+        @media (min-width: 768px) {
+            .star {
+                font-size: 1.8em;
+            }
+        }
+
+        /* Desktop screens */
+        @media (min-width: 1024px) {
+            .star {
+                font-size: 2em;
+            }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.8); }
+        }
+
+        .music-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3em;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+
+        /* Tablet screens */
+        @media (min-width: 768px) {
+            .music-toggle {
+                top: 18px;
+                right: 18px;
+                padding: 13px;
+                font-size: 1.4em;
+            }
+        }
+
+        /* Desktop screens */
+        @media (min-width: 1024px) {
+            .music-toggle {
+                top: 20px;
+                right: 20px;
+                padding: 15px;
+                font-size: 1.5em;
+            }
+        }
+
+        .music-toggle:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background decorations -->
+    <div class="balloon">🎈</div>
+    <div class="balloon">🎈</div>
+    <div class="balloon">🎈</div>
+    <div class="balloon">🎈</div>
+    <div class="balloon">🎈</div>
+
+    <!-- Music toggle button -->
+    <button class="music-toggle" onclick="toggleMusic()">🔊</button>
+
+    <!-- ========== BACKGROUND MUSIC SECTION ========== -->
+    <!-- Replace the URL below with your own music file URL -->
+    <!-- Supported formats: .mp3, .ogg, .wav -->
+    <!-- The music will auto-play after user clicks the first button -->
+    <audio id="bgMusic" loop>
+        <source src="Pictures/funny.mp3" type="audio/mpeg">
+        <!-- Example: https://www.example.com/birthday-song.mp3 -->
+    </audio>
+    <!-- =============================================== -->
+
+    <div class="container">
+        <!-- First Screen: "Is it your Birthday?" -->
+        <div id="screen1" class="screen active">
+            <div class="emoji">🎂</div>
+            <h1>Is it your Birthday?</h1>
+            <div class="emoji">🎉</div>
+            <br>
+            <button onclick="nextScreen()">Yes! 🎊</button>
+        </div>
+
+        <!-- Second Screen: "You Have a Message!" -->
+        <div id="screen2" class="screen">
+            <div class="message-box">
+                <h2>You Have a Message! <span class="heart">❤️</span></h2>
+                <div class="emoji">💝</div>
+                <br>
+                <!-- ========== LINK TO NEXT PAGE ========== -->
+                <!-- Replace "next-page.html" with your actual next page URL -->
+                <a href="next-page.html" style="text-decoration: none;">
+                    <button>Continue</button>
+                </a>
+                <!-- ======================================== -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let musicPlaying = false;
+        const music = document.getElementById('bgMusic');
+
+        // Create confetti
+        function createConfetti() {
+            const colors = ['#f0f', '#0ff', '#ff0', '#0f0', '#f00', '#00f'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetti);
+            }
+        }
+
+        // Create stars
+        function createStars() {
+            for (let i = 0; i < 20; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.textContent = '⭐';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                document.body.appendChild(star);
+            }
+        }
+
+        function nextScreen() {
+            document.getElementById('screen1').classList.remove('active');
+            document.getElementById('screen2').classList.add('active');
+            createConfetti();
+            createStars();
+            playMusic();
+        }
+
+        function playMusic() {
+            if (!musicPlaying) {
+                music.muted = false;
+                music.volume = 1.0;
+                music.play().catch(e => {
+                    // Retry if failed
+                    setTimeout(() => {
+                        music.play().catch(err => console.log('Audio play failed:', err));
+                    }, 100);
+                });
+                musicPlaying = true;
+            }
+        }
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                music.pause();
+                musicPlaying = false;
+                document.querySelector('.music-toggle').textContent = '🔇';
+            } else {
+                music.play().catch(e => console.log('Audio play failed:', e));
+                musicPlaying = true;
+                document.querySelector('.music-toggle').textContent = '🔊';
+            }
+        }
+
+        // Initial setup
+        createStars();
+    </script>
+</body>
+</html>
